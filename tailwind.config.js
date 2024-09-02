@@ -7,7 +7,13 @@ export default {
     "./node_modules/flowbite/**/*.js"
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'logo-blue': '1C214D',
+        'bg-app': 'BDC1C8',
+        'red-hki': 'CF1515'
+      }
+    },
   },
   plugins: [],
 }
