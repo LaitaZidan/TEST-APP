@@ -10,4 +10,5 @@ class SPAController extends Controller
     {
         return view('home');
     }
+    
 }

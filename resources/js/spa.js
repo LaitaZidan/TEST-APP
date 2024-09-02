@@ -1,3 +1,5 @@
+
+
 class LoginForm extends HTMLElement {
     constructor() {
         super();
@@ -12,7 +14,7 @@ class LoginForm extends HTMLElement {
                     <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                                Masuk ke akun anda
+                                masuk ke akun anda
                             </h1>
                             <form class="space-y-4 md:space-y-6" action="#">
                                 <div>
@@ -36,7 +38,7 @@ class LoginForm extends HTMLElement {
                                 </div>
                                 <button type="submit" class="w-full text-white bg-red-700 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Masuk</button>
                                 <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                                    tidak punya akun? <a href="signup" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Daftar</a>
+                                    tidak punya akun? <a href="signup" data-signup class="font-medium text-primary-600 hover:underline dark:text-primary-500">Daftar</a>
                                 </p>
                             </form>
                         </div>
@@ -63,7 +65,7 @@ class SignUpForm extends HTMLElement {
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <h1
                         class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                        Masuk ke akun anda
+                        Daftar akun
                     </h1>
                     <form class="space-y-4 md:space-y-6" action="#">
                         <div>
@@ -92,26 +94,11 @@ class SignUpForm extends HTMLElement {
                                 <option value="P">Perempuan</option>
                             </select>
                         </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-start">
-                                <div class="flex items-center h-5">
-                                    <input id="remember" aria-describedby="remember" type="checkbox"
-                                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                                        required="">
-                                </div>
-                                <div class="ml-3 text-sm">
-                                    <label for="remember" class="text-gray-500 dark:text-gray-300">Ingat saya</label>
-                                </div>
-                            </div>
-                            <a href="#"
-                                class="text-sm font-medium text-primary-600 hover:underline dark:text-white">Lupa kata
-                                sandi?</a>
-                        </div>
                         <button type="submit"
-                            class="w-full text-white bg-red-700 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Masuk</button>
+                            class="w-full text-white bg-red-700 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Daftar</button>
                         <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                            tidak punya akun? <a href="signup"
-                                class="font-medium text-primary-600 hover:underline dark:text-primary-500">Daftar</a>
+                            sudah punya akun? <a href="login" data-login
+                                class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login</a>
                         </p>
                     </form>
                 </div>
@@ -126,7 +113,6 @@ class SignUpForm extends HTMLElement {
 customElements.define('login-form', LoginForm);
 customElements.define('sign-up-form', SignUpForm);
 
-// SPA Navigation
 function loadContent(route) {
     const appContent = document.getElementById('app-content');
     appContent.innerHTML = ''; // membersihkan konten sebelumnya
@@ -134,8 +120,10 @@ function loadContent(route) {
     let newElement;
     if (route === 'login') {
         newElement = new LoginForm(); // menggunakan konstruktor untuk membuat elemen kustom
+        console.log(`Navigating to ${route}`);
     } else if (route === 'signup') {
         newElement = new SignUpForm(); // menggunakan konstruktor untuk membuat elemen kustom
+        console.log(`Navigating to ${route}`);
     }
 
     if (newElement) {
@@ -144,5 +132,17 @@ function loadContent(route) {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+
     loadContent('login');
+    document.querySelector('a[data-signup]').addEventListener('click', (event) => {
+        event.preventDefault(); // Mencegah link default behavior
+        loadContent('signup');
+    });
+    document.querySelector('a[data-login]').addEventListener('click', (event) => {
+        event.preventDefault(); // Mencegah link default behavior
+        loadContent('login');
+    });
 });
+
+
+
