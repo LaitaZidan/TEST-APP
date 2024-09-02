@@ -120,10 +120,10 @@ function loadContent(route) {
     let newElement;
     if (route === 'login') {
         newElement = new LoginForm(); // menggunakan konstruktor untuk membuat elemen kustom
-        console.log(`Navigating to ${route}`);
+        document.title = 'Login - Hutama Karya Insfrastruktur';
     } else if (route === 'signup') {
         newElement = new SignUpForm(); // menggunakan konstruktor untuk membuat elemen kustom
-        console.log(`Navigating to ${route}`);
+        document.title = 'Signup - Hutama Karya Insfrastruktur';
     }
 
     if (newElement) {
